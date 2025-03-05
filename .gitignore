@@ -1,0 +1,41 @@
+# Temporary files
+.DS_Store
+*.swp
+*.swo
+*.log
+*.bak
+*.tmp
+*.out
+
+# Terraform
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.tfvars.json
+terraform.tfplan
+terraform-output/
+
+# Vagrant
+.vagrant/
+*.box
+
+# Ansible
+*.retry
+inventory.yml
+ansible.cfg
+vault.yml
+
+# AWS CLI
+.aws/
+*.pem
+*.key
+credentials
+
+# Dotenv
+.env
+.env.*
+
+# Docker compose
+docker-compose.override.yml
