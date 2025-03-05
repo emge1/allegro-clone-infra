@@ -1,0 +1,33 @@
+services:
+  web_local:
+    build:
+      context: ../allegro-clone-api
+      dockerfile: Dockerfile
+      args:
+        REQUIREMENTS: requirements/local.txt
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.local
+      ENVIRONMENT: local
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ../allegro-clone-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://web_local:8000
+    networks:
+      - app-network
+    depends_on:
+      - web_local
+
+networks:
+  app-network:
+    driver: bridge
