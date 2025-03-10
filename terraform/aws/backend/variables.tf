@@ -1,5 +1,4 @@
-variable "aws_region" {
-  description = " AWS region for resources"
+variable "vpc_id" {
+  description = "VPC ID"
   type        = string
-  default     = "eu-central-1"
 }
