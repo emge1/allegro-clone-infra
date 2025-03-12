@@ -4,7 +4,42 @@
   become: yes
   become_method: sudo
   remote_user: vagrant
+
   tasks:
-    #  - import_tasks: chapter2/pam_pwquality.yml
-    #  - import_tasks: chapter2/user_and_group.yml
-    
+    - name: Update system
+      dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+    - name: Install required packages
+      dnf:
+        name:
+          - dnf-plugins-core
+          - curl
+          - ca-certificates
+        state: present
+
+    - name: Add Docker repo
+      shell: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Install Docker and Docker Compose
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: present
+
+    - name: Start and enable Docker
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Add vagrant user to docker group
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
