@@ -5,9 +5,13 @@ module "aws_infrastructure" {
   aws_region   = var.aws_region
 }
 
-module "vercel_infrastructure" {
-  source = "./vercel"
+resource "azurerm_resource_group" "rg" {
+  name     = "my-ui-resource-group"
+  location = "East US"
+}
 
-  project_name       = var.project_name
-  gui_repository_url = var.gui_repository_url
+resource "azurerm_static_site" "ui" {
+  name                = "my-ui-app"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
 }
