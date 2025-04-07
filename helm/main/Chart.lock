@@ -1,0 +1,27 @@
+dependencies:
+- name: api
+  repository: file://../charts/api
+  version: 0.1.0
+- name: ui
+  repository: file://../charts/ui
+  version: 0.1.0
+- name: postgres
+  repository: file://../charts/postgres
+  version: 0.1.0
+- name: prometheus
+  repository: file://../charts/prometheus
+  version: 0.1.0
+- name: grafana
+  repository: file://../charts/grafana
+  version: 0.1.0
+- name: elasticsearch
+  repository: file://../charts/elasticsearch
+  version: 0.1.0
+- name: kibana
+  repository: file://../charts/kibana
+  version: 0.1.0
+- name: logstash
+  repository: file://../charts/logstash
+  version: 0.1.0
+digest: sha256:fd9da09de6ba19f5b2be0ff118f2b6533803bb0199e0c32a7d5a6260a1579993
+generated: "2025-04-07T14:17:50.6731826+02:00"
