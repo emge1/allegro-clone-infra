@@ -40,3 +40,8 @@ credentials
 
 # Docker compose
 docker-compose.override.yml
+
+# Helm build artifacts
+*.tgz
+helm/charts/**/charts/
+helm/charts/**/tmpcharts/
