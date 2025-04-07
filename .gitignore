@@ -45,3 +45,6 @@ docker-compose.override.yml
 *.tgz
 helm/charts/**/charts/
 helm/charts/**/tmpcharts/
+
+#K8s
+values-secret.yaml
