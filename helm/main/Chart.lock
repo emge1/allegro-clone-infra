@@ -23,5 +23,8 @@ dependencies:
 - name: logstash
   repository: file://../charts/logstash
   version: 0.1.0
-digest: sha256:fd9da09de6ba19f5b2be0ff118f2b6533803bb0199e0c32a7d5a6260a1579993
-generated: "2025-04-07T14:17:50.6731826+02:00"
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 4.12.1
+digest: sha256:17a56c821d1c60f163dfc9c396ab81c72e009874207d1473594ded3193ed02dc
+generated: "2025-04-08T15:36:45.5747876+02:00"

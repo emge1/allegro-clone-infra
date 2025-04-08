@@ -30,3 +30,6 @@ dependencies:
   - name: logstash
     version: 0.1.0
     repository: "file://../charts/logstash"
+  - name: ingress-nginx
+    version: 4.12.1
+    repository: "https://kubernetes.github.io/ingress-nginx"
