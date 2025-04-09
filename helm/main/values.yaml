@@ -16,23 +16,27 @@ api:
     annotations: {}
     name: ""
 
-  podAnnotations: {}
-  podLabels: {}
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+  podLabels:
+    app.kubernetes.io/component: api
 
-  podSecurityContext: {}
-  # fsGroup: 2000
+  podSecurityContext:
+   fsGroup: 2000
 
-  securityContext: {}
+  securityContext:
     # capabilities:
     #   drop:
     #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+    runAsUser: 1000
+    runAsGroup: 3000
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
 
   service:
     type: ClusterIP
-    port: 80
+    port: 8000
 
   ingress:
     enabled: true
@@ -74,10 +78,10 @@ api:
       port: http
 
   autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
   # targetMemoryUtilizationPercentage: 80
 
   volumes: []
