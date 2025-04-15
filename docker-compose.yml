@@ -20,7 +20,7 @@ services:
       context: ../allegro-clone-frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
       REACT_APP_API_URL: http://web_local:8000
     networks:
