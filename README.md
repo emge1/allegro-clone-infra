@@ -25,8 +25,22 @@ While the infrastructure is under active development, both the [API](https://git
 
 
 # Architecture
+![Architecture](media/architecture.jpeg)
 
+This architecture is planned for a production-ready AWS environment based on a containerized, multi-AZ setup. 
+Incoming traffic is resolved by **Route 53 (1)**, routed through **CloudFront (2)** to serve **static frontend** 
+files **from S3 (3)** or passed to the backend via an **Application Load Balancer (4)** deployed in public subnets. **NAT 
+Gateways (5)** are also placed in the public subnets to allow outbound internet access for workloads running in private subnets.
 
+The backend is hosted in a managed EKS cluster spanning two private subnets across separate Availability 
+Zones. An **Ingress Controller (6)** routes traffic to **horizontally scalable** (7) API pods (8). Database (PostgreSQL) is hosted 
+in **Amazon RDS** (9), configured with Multi-AZ replication. Logs and metrics are processed via internal 
+**Monitoring (10)** and **Logging (11)** stacks, with logs shipped to **OpenSearch (12)** (managed by AWS and integrated within 
+the same VPC).
+
+In the development environment, EKS is replaced by Minikube, the PostgreSQL database runs as a pod inside the cluster, 
+the UI is served from a built Docker image, and application logging is handled through standard output with `DEBUG = True` 
+in Django.
 
 # Containerization (Docker)
 Application components ([API](https://github.com/emge1/allegro-clone-api)
