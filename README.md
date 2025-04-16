@@ -17,14 +17,30 @@ While the infrastructure is under active development, both the [API](https://git
 * [Continuous Deployment  (GitHub Actions)](#continuous-deployment--github-actions-)
   * [Security & Reliability (planned)](#security--reliability--planned-)
 * [Orchestration (Kubernetes & Helm)](#orchestration--kubernetes--helm-)
-  * [Security & Scalability](#security--scalability-1)
+  * [Security & Scalability (in progress)](#security--scalability--in-progress-)
 * [Infrastructure (Terraform & AWS)](#infrastructure--terraform--aws-)
   * [Security & Networking (in progress)](#security--networking--in-progress-)
 * [Monitoring & Logging](#monitoring--logging)
-  * [Security & Scalability (Planned)](#security--scalability--planned-)
+  * [Security & Scalability (planned)](#security--scalability--planned-)
 
 
 # Architecture
+![Architecture](media/architecture.jpeg)
+
+This architecture is planned for a production-ready AWS environment based on a containerized, multi-AZ setup. 
+Incoming traffic is resolved by **Route 53 (1)**, routed through **CloudFront (2)** to serve **static frontend** 
+files **from S3 (3)** or passed to the backend via an **Application Load Balancer (4)** deployed in public subnets. **NAT 
+Gateways (5)** are also placed in the public subnets to allow outbound internet access for workloads running in private subnets.
+
+The backend is hosted in a managed EKS cluster spanning two private subnets across separate Availability 
+Zones. An **Ingress Controller (6)** routes traffic to **horizontally scalable** (7) API pods (8). Database (PostgreSQL) is hosted 
+in **Amazon RDS** (9), configured with Multi-AZ replication. Logs and metrics are processed via internal 
+**Monitoring (10)** and **Logging (11)** stacks, with logs shipped to **OpenSearch (12)** (managed by AWS and integrated within 
+the same VPC).
+
+In the development environment, EKS is replaced by Minikube, the PostgreSQL database runs as a pod inside the cluster, 
+the UI is served from a built Docker image, and application logging is handled through standard output with `DEBUG = True` 
+in Django.
 
 # Containerization (Docker)
 Application components ([API](https://github.com/emge1/allegro-clone-api)
@@ -94,7 +110,7 @@ Key features:
 - Logging stack using Loki *(planned)* 
 - OpenSearch planned for centralized log storage *(planned)*
 
-## Security & Scalability
+## Security & Scalability (in progress)
 
 - API deployed with **readiness/liveness probes**  
 - Containers run with **non-root users**  
@@ -115,7 +131,7 @@ Key features (*in progress*):
 - **Terraform workflow** triggered only under specific conditions (tags), with optional manual approvals (**Continuous Delivery**)
 - **IAM roles and policies** managed as code  
 - **VPC, subnets, and security groups** defined via Terraform 
-- - **Subnet layout**:
+- **Subnet layout**:
   - public subnets for ALB  
   - private subnets for API and RDS
 - **S3**:
@@ -146,7 +162,7 @@ Key features (*planned*)
   - errors
   - saturation
 
-## Security & Scalability (Planned)
+## Security & Scalability (planned)
 
 - Secure access to Grafana via ingress/auth  
 - Limited data retention and log cleanup  
