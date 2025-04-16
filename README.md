@@ -115,7 +115,7 @@ Key features (*in progress*):
 - **Terraform workflow** triggered only under specific conditions (tags), with optional manual approvals (**Continuous Delivery**)
 - **IAM roles and policies** managed as code  
 - **VPC, subnets, and security groups** defined via Terraform 
-- - **Subnet layout**:
+- **Subnet layout**:
   - public subnets for ALB  
   - private subnets for API and RDS
 - **S3**:
