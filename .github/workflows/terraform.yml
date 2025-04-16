@@ -1,0 +1,40 @@
+name: Terraform
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+env:
+  REPO_URL: emge1/allegro-clone-infra
+  REPO_BRANCH: main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Checkout code
+        run: echo "This step is in progress"
+
+      - name: Setup Terraform
+        run: echo "This step is in progress"
+
+      - name: Configure AWS credentials
+        run: echo "This step is in progress"
+
+      - name: Determine environment from tag
+        run: echo "This step is in progress"
+
+      - name: Terraform Init
+        run: echo "This step is in progress"
+
+      - name: Terraform Validate
+        run: echo "This step is in progress"
+
+      - name: Terraform Plan
+        run: echo "This step is in progress"
+
+      - name: Terraform Apply
+        run: echo "This step is in progress"
