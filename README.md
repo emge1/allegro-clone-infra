@@ -17,14 +17,16 @@ While the infrastructure is under active development, both the [API](https://git
 * [Continuous Deployment  (GitHub Actions)](#continuous-deployment--github-actions-)
   * [Security & Reliability (planned)](#security--reliability--planned-)
 * [Orchestration (Kubernetes & Helm)](#orchestration--kubernetes--helm-)
-  * [Security & Scalability](#security--scalability-1)
+  * [Security & Scalability (in progress)](#security--scalability--in-progress-)
 * [Infrastructure (Terraform & AWS)](#infrastructure--terraform--aws-)
   * [Security & Networking (in progress)](#security--networking--in-progress-)
 * [Monitoring & Logging](#monitoring--logging)
-  * [Security & Scalability (Planned)](#security--scalability--planned-)
+  * [Security & Scalability (planned)](#security--scalability--planned-)
 
 
 # Architecture
+
+
 
 # Containerization (Docker)
 Application components ([API](https://github.com/emge1/allegro-clone-api)
@@ -94,7 +96,7 @@ Key features:
 - Logging stack using Loki *(planned)* 
 - OpenSearch planned for centralized log storage *(planned)*
 
-## Security & Scalability
+## Security & Scalability (in progress)
 
 - API deployed with **readiness/liveness probes**  
 - Containers run with **non-root users**  
@@ -146,7 +148,7 @@ Key features (*planned*)
   - errors
   - saturation
 
-## Security & Scalability (Planned)
+## Security & Scalability (planned)
 
 - Secure access to Grafana via ingress/auth  
 - Limited data retention and log cleanup  
