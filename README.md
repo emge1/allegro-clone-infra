@@ -114,8 +114,8 @@ Application components are orchestrated using Kubernetes, with Helm charts manag
 
 Key features:
 - **Helm-based deployment** for API (custom chart)  
-- Environment-specific values files (dev/staging/prod, *planned*)
-- Dev environment uses in-cluster PostgreSQL and UI *(planned)*  
+- Environment-specific values files (dev/staging/prod)
+- Dev environment uses in-cluster PostgreSQL and UI *(in progress)*  
 - **Ingress Controller** integrated with AWS ALB *(planned)*
 - Monitoring components (Prometheus & Grafana) deployed via Helm *(planned)*  
 - Logging stack using Loki *(planned)* 
@@ -125,8 +125,8 @@ Key features:
 
 - API deployed with **readiness/liveness probes**  
 - Containers run with **non-root users**  
-- K8s **RBAC policies and ServiceAccounts** for access isolation *(planned)*  
-- **Namespaces** for environment separation *(planned)*  
+- **Namespaces** for environment separation
+- K8s **RBAC policies and ServiceAccounts** for access isolation *(planned)*   
 - **Resource requests & limits** to control consumption *(planned)*  
 - **Horizontal Pod Autoscaler** for API *(planned)*  
 - TLS termination via AWS ALB with cert-manager *(planned)*  
@@ -137,30 +137,31 @@ The current infrastructure setup was initially designed without Kubernetes in mi
 
 This infrastructure setup focuses on the **production environment**.
 
-Key features (*in progress*):
+Key features:
 
-- **Terraform workflow** triggered only under specific conditions (tags), with optional manual approvals (**Continuous Delivery**)
-- **IAM roles and policies** managed as code  
-- **VPC, subnets, and security groups** defined via Terraform 
+- **IAM roles and policies** managed as code
+- **VPC, subnets, and security groups** defined via Terraform (security groups *in progress*)
 - **Subnet layout**:
   - public subnets for ALB  
   - private subnets for API and RDS
 - **S3**:
-  - backend for Terraform state *(planned: S3 with DynamoDB locking)*  
-  - production hosting for the frontend (UI build)  
-- **RDS** (Postgres) as the production database  
-- **Application Load Balancer (ALB)** as entrypoint for external traffic, integrated with K8s Ingress   
+  - backend for Terraform state (S3 with DynamoDB locking)  
+  - production hosting for the frontend (UI build)
+- **EKS** as a cluster for the project (API, monitoring, logging, etc. *in progress*)
+- **RDS** (Postgres) as the production database (*planned*)
+- **Application Load Balancer (ALB)** as entrypoint for external traffic, integrated with K8s Ingress (*planned*)  
+- **Terraform workflow** triggered only under specific conditions (tags), with optional manual approvals (**Continuous Delivery**, *planned*)
 
 Moreover, plans also include introducing Ansible and Vagrant for managing local development environments more consistently.
 
 ## Security & Networking (in progress)
-- Secrets are planned to be managed via **AWS Secrets Manager**, with potential integration into the application or Kubernetes via environment variables  
-- SSL certificates managed by **AWS Certificate Manager (ACM)**, attached to ALB and (optionally) CloudFront  
-- **CloudFront** *(planned)* for UI delivery from S3 — independent from ALB (serves static content)  
-- **DNS management** *(planned)* via **Route 53**, for domain configuration and routing to ALB or CloudFront
+- Secrets are  managed via **AWS Secrets Manager**, with potential integration into the application or Kubernetes via environment variables  
+- SSL certificates managed by **AWS Certificate Manager (ACM)**, attached to ALB and (optionally) CloudFront (*planned*)
+- **CloudFront** for UI delivery from S3 — independent of ALB (serves static content, *planned*)  
+- **DNS management** via **Route 53**, for domain configuration and routing to ALB or CloudFront (*planned*)
 
 # Monitoring & Logging
-Monitoring and logging are **planned**, with some tooling already deployed but not yet actively configured or used.
+Monitoring and logging are planned, with some tooling already deployed but not yet actively configured or used.
 
 Key features (*planned*)
 - **Prometheus**, **Grafana**, and **Loki** deployed via Helm  
