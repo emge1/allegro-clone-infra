@@ -115,8 +115,8 @@ Application components are orchestrated using Kubernetes, with Helm charts manag
 Key features:
 - **Helm-based deployment** for API (custom chart)  
 - Environment-specific values files (dev/staging/prod)
-- Dev environment uses in-cluster PostgreSQL and UI *(in progress)*  
-- **Ingress Controller** integrated with AWS ALB *(planned)*
+- Dev environment uses in-cluster PostgreSQL and UI
+- **Ingress Controller** integrated with AWS ALB *(in progress)*
 - Monitoring components (Prometheus & Grafana) deployed via Helm *(planned)*  
 - Logging stack using Loki *(planned)* 
 - OpenSearch planned for centralized log storage *(planned)*
