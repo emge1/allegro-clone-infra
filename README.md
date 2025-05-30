@@ -140,16 +140,16 @@ This infrastructure setup focuses on the **production environment**.
 Key features:
 
 - **IAM roles and policies** managed as code
-- **VPC, subnets, and security groups** defined via Terraform (security groups *in progress*)
+- **VPC, subnets, and security groups** defined via Terraform
 - **Subnet layout**:
   - public subnets for ALB  
   - private subnets for API and RDS
 - **S3**:
   - backend for Terraform state (S3 with DynamoDB locking)  
   - production hosting for the frontend (UI build)
+- **Application Load Balancer (ALB)** as entrypoint for external traffic, integrated with K8s Ingress
 - **EKS** as a cluster for the project (API, monitoring, logging, etc. *in progress*)
-- **RDS** (Postgres) as the production database (*planned*)
-- **Application Load Balancer (ALB)** as entrypoint for external traffic, integrated with K8s Ingress (*planned*)  
+- **RDS** (Postgres) as the production database (*planned*) 
 - **Terraform workflow** triggered only under specific conditions (tags), with optional manual approvals (**Continuous Delivery**, *planned*)
 
 Moreover, plans also include introducing Ansible and Vagrant for managing local development environments more consistently.
