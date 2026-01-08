@@ -28,9 +28,9 @@ If you're a recruiter or would like access to the full setup for review purposes
 * [Continuous Deployment  (GitHub Actions)](#continuous-deployment--github-actions-)
   * [Security & Reliability (planned)](#security--reliability--planned-)
 * [Orchestration (Kubernetes & Helm)](#orchestration--kubernetes--helm-)
-  * [Security & Scalability (in progress)](#security--scalability--in-progress-)
+  * [Security & Scalability](#security--scalability-)
 * [Infrastructure (Terraform & AWS)](#infrastructure--terraform--aws-)
-  * [Security & Networking (in progress)](#security--networking--in-progress-)
+  * [Security & Networking](#security--networking--)
 * [Monitoring & Logging](#monitoring--logging)
   * [Security & Scalability (planned)](#security--scalability--planned-)
 
@@ -114,23 +114,27 @@ Application components are orchestrated using Kubernetes, with Helm charts manag
 
 Key features:
 - **Helm-based deployment** for API (custom chart)  
-- Environment-specific values files (dev/staging/prod)
-- Dev environment uses in-cluster PostgreSQL and UI
-- **Ingress Controller** integrated with AWS ALB *(in progress)*
-- Monitoring components (Prometheus & Grafana) deployed via Helm *(planned)*  
-- Logging stack using Loki *(planned)* 
-- OpenSearch planned for centralized log storage *(planned)*
+  - Work flows:
+    - API
+    - UI (dev only)
+    - DB (dev only) - migrated to StatefulSet
+  - Cluster infra components:
+    - Configured ingress and ingress controller
+    - cert manager used for local TLS
+- Environment-specific Helm values prepared (dev/prod)
+- Dev environment runs on minikube
+- Kubernetes and Helm setup is documented with a reproducible guide
 
-## Security & Scalability (in progress)
+## Security & Scalability
+- API deployed with **readiness/liveness/startup probes**  
+- Containers run with **non-root users**
+- **Namespaces** for environment separation 
+- **Resource requests & limits** to control consumption using default Helm values
 
-- API deployed with **readiness/liveness probes**  
-- Containers run with **non-root users**  
-- **Namespaces** for environment separation
-- K8s **RBAC policies and ServiceAccounts** for access isolation *(planned)*   
-- **Resource requests & limits** to control consumption *(planned)*  
-- **Horizontal Pod Autoscaler** for API *(planned)*  
-- TLS termination via AWS ALB with cert-manager *(planned)*  
-- NetworkPolicies to restrict internal traffic *(planned)*
+## Planned / in progress
+- Migration from minikube to k3s
+- Observability
+- HPA, NetworkPolicies, RBAC
 
 # Infrastructure (Terraform & AWS)
 This infrastructure setup focuses on the **production environment**.
