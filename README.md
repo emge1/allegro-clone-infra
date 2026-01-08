@@ -133,8 +133,6 @@ Key features:
 - NetworkPolicies to restrict internal traffic *(planned)*
 
 # Infrastructure (Terraform & AWS)
-The current infrastructure setup was initially designed without Kubernetes in mind and is now being refactored to support a more production-grade environment with EKS and a cloud-native approach.
-
 This infrastructure setup focuses on the **production environment**.
 
 Key features:
@@ -147,18 +145,17 @@ Key features:
 - **S3**:
   - backend for Terraform state (S3 with DynamoDB locking)  
   - production hosting for the frontend (UI build)
-- **Application Load Balancer (ALB)** as entrypoint for external traffic, integrated with K8s Ingress
-- **EKS** as a cluster for the project (API, monitoring, logging, etc. *in progress*)
-- **RDS** (Postgres) as the production database (*planned*) 
-- **Terraform workflow** triggered only under specific conditions (tags), with optional manual approvals (**Continuous Delivery**, *planned*)
+- **Application Load Balancer (ALB)** prepared for integration with K8s Ingress
+- **EKS** as a cluster for the project (API, monitoring, logging, etc.)
+- **RDS** (Postgres) as the production database
 
-Moreover, plans also include introducing Ansible and Vagrant for managing local development environments more consistently.
+## Security & Networking
+- Secrets are  managed via **AWS Secrets Manager**, with potential integration into the application or Kubernetes
+- **CloudFront** for UI delivery from S3 — independent of ALB (serves static content)
 
-## Security & Networking (in progress)
-- Secrets are  managed via **AWS Secrets Manager**, with potential integration into the application or Kubernetes via environment variables  
+## Planned / in progress
+- **DNS management** via **Route 53**, for domain configuration and routing to ALB or CloudFront (*in progress*)
 - SSL certificates managed by **AWS Certificate Manager (ACM)**, attached to ALB and (optionally) CloudFront (*planned*)
-- **CloudFront** for UI delivery from S3 — independent of ALB (serves static content, *planned*)  
-- **DNS management** via **Route 53**, for domain configuration and routing to ALB or CloudFront (*planned*)
 
 # Monitoring & Logging
 Monitoring and logging are planned, with some tooling already deployed but not yet actively configured or used.
