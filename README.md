@@ -14,6 +14,8 @@ The full infrastructure code is maintained in a private repository.
 ### Example project decisions
 * **EKS instead of ECS** – chosen for greater flexibility and alignment with Kubernetes ecosystem and tooling, despite the higher price
 
+
+## System Overview
 ### GitOps (ArgoCD)
 ![Architecture](media/argocd.png)
 
