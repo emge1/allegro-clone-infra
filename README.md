@@ -20,7 +20,7 @@ The full infrastructure code is maintained in a private repository.
 ![Architecture](media/argocd.png)
 
 ### Load test (Locust)
-Note: API and database were identified as performance bottlenecks
+Note: Low infrastructure utilization suggests bottlenecks outside of compute resources (likely application or database layer).
 ![Architecture](media/locust-5users-2rate.png)
 
 ### Dashboard (Prometheus, Grafana)
